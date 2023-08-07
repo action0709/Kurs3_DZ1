@@ -1,7 +1,7 @@
 package com.SkyPro.Kurs3_DZ1.service;
 
 import com.SkyPro.Kurs3_DZ1.exception.DataNotFoundException;
-import com.SkyPro.Kurs3_DZ1.model.Student;
+import com.SkyPro.Kurs3_DZ1.model.Faculty;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -9,34 +9,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class StudentService {
-    private final Map<Long, Student> map = new HashMap<>();
+public class FacultyService {
+    private final Map<Long, Faculty> map = new HashMap<>();
     private Long COUNTER = 1L;
 
-    public Student getById(Long id) {
+    public Faculty getById(Long id) {
         return map.get(id);
     }
 
-    public Collection<Student> getAll() {
+    public Collection<Faculty> getAll() {
         return map.values();
 
     }
 
-    public Student create(Student student) {
+    public Faculty create(Faculty faculty) {
         Long nextId = COUNTER++;
-        student.setId(nextId);
-        map.put(student.getId(), student);
-        return student;
+        faculty.setId(nextId);
+        map.put(faculty.getId(), faculty);
+        return faculty;
     }
 
-    public Student update(Long id, Student student) {
+    public Faculty update(Long id, Faculty faculty) {
         if (!map.containsKey(id)) {
             throw new DataNotFoundException();
         }
-        Student existingStudent = map.get(id);
-        existingStudent.setName(student.getName());
-        existingStudent.setAge(student.getAge());
-        return existingStudent;
+        Faculty existingFaculty = map.get(id);
+        existingFaculty.setName(faculty.getName());
+        existingFaculty.setColor(faculty.getColor());
+        return existingFaculty;
     }
 
     public void delete (Long id){
