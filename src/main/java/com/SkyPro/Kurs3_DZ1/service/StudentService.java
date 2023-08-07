@@ -20,6 +20,7 @@ public Collection<Student> getAll(){
 }
 public Student create (Student student){
     Long nextId = COUNTER++;
+    student.setId(nextId);
     map.put(student.getId(), student);
     return student;
 }
