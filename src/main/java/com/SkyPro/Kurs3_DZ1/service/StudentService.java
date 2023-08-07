@@ -24,4 +24,7 @@ public Student create (Student student){
     map.put(student.getId(), student);
     return student;
 }
+public Student update(Long id, Student student){
+
+}
 }
