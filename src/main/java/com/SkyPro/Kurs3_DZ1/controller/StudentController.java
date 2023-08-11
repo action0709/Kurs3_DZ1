@@ -10,7 +10,12 @@ import java.util.Collection;
 @RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
-@GetMapping
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @GetMapping
     public Collection <Student> getAll(){
         return studentService.getAll();
     }
@@ -19,7 +24,10 @@ public class StudentController {
     public Student getById (@PathVariable("id") Long id){
     return studentService.getById(id);
     }
-
+    @GetMapping("/filtered")
+    public Collection<Student> getByAge (@RequestParam("age") int age){
+        return studentService.getByAge(age);
+    }
     @PostMapping
     public  Student create(@RequestBody Student student){
         return studentService.create(student);
@@ -31,6 +39,7 @@ public class StudentController {
 
     @DeleteMapping("/id")
     public void delete(@PathVariable("id") Long id){
+
     studentService.delete(id);
     }
 }

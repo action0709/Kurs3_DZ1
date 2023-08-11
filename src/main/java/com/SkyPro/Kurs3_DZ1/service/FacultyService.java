@@ -2,11 +2,13 @@ package com.SkyPro.Kurs3_DZ1.service;
 
 import com.SkyPro.Kurs3_DZ1.exception.DataNotFoundException;
 import com.SkyPro.Kurs3_DZ1.model.Faculty;
+import com.SkyPro.Kurs3_DZ1.model.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class FacultyService {
@@ -20,6 +22,12 @@ public class FacultyService {
     public Collection<Faculty> getAll() {
         return map.values();
 
+    }
+    public Collection<Faculty>getByColor(String color){
+
+        return map.values().stream()
+                .filter(s->s.getColor().equalsIgnoreCase(color))
+                .collect(Collectors.toList());
     }
 
     public Faculty create(Faculty faculty) {

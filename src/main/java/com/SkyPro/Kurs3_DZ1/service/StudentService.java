@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
+
+
     private final Map<Long, Student> map = new HashMap<>();
     private Long COUNTER = 1L;
 
@@ -21,6 +24,13 @@ public class StudentService {
         return map.values();
 
     }
+public Collection<Student>getByAge(int age){
+
+     return map.values().stream()
+             .filter(s->s.getAge()==age)
+             .collect(Collectors.toList());
+}
+
 
     public Student create(Student student) {
         Long nextId = COUNTER++;
@@ -44,5 +54,7 @@ public class StudentService {
             throw new DataNotFoundException();
         }
          }
+
+
 }
 
